@@ -10,7 +10,7 @@ class Product(Base):
 
     __tablename__ = "products"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     store = Column(String, nullable=False)
     sku = Column(String, nullable=True)
     barcodes = Column(String, nullable=True)
@@ -31,7 +31,7 @@ class BranchProduct(Base):
 
     __tablename__ = "branchproducts"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     product_id = Column(None, ForeignKey("products.id"), nullable=False)
     branch = Column(String, nullable=False)
     stock = Column(Integer, default=0, nullable=False)

@@ -9,18 +9,6 @@ class CaWalmartSpider(scrapy.Spider):
     allowed_domains = ["walmart.ca"]
     start_urls = ["https://www.walmart.ca/en/grocery/fruits-vegetables/fruits/N-3852"]
 
-    # def request(self, url, callback):
-    #     """
-    #      wrapper for scrapy.request
-    #     """
-    #     request = scrapy.Request(url=url, callback=callback)
-    #     request.cookies['find-in-store-section'] = 1
-    #     return request
-    #
-    # def start_requests(self):
-    #     for i, url in enumerate(self.start_urls):
-    #         yield self.request(url, self.parse)
-
     def parse(self, response):
         all_items = response.css('article')
         for product in all_items:
@@ -44,14 +32,8 @@ class CaWalmartSpider(scrapy.Spider):
         item['sku'] = json_fields['sku']
         item['image_url'] = json_fields['image'][0]
 
-
-
         # text = response.css('script:contains("window.__PRELOADED_STATE__") ::text').get()
-        print(response.text)
-
-
         # barcodes = text[text.index('upc":[') + len('upc":['):text.index('],')]
-        # print(barcodes + 'hola')
         # item['barcodes'] = barcodes
         item['store'] = 'Walmart'
         item['package'] = '1 unit'
